@@ -26,7 +26,15 @@ const perfil = (req, res) => {
     res.json({ msg: 'Mostrando perfil'})
 }
 
+const confirmar = (req, res) => {
+    //Cuando leemos datos de la url usamos req.params y luego .token o .usuario o la palabra que elegimos en la route en este caso /:token
+    console.log(req.params.token)
+
+    res.json({ msg: 'Confirmar perfil'})
+}
+
 export {
     registrar, 
     perfil,
+    confirmar
 }
