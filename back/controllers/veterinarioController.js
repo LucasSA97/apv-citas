@@ -26,15 +26,29 @@ const perfil = (req, res) => {
     res.json({ msg: 'Mostrando perfil'})
 }
 
-const confirmar = (req, res) => {
+const confirmar = async (req, res) => {
     //Cuando leemos datos de la url usamos req.params y luego .token o .usuario o la palabra que elegimos en la route en este caso /:token
-    console.log(req.params.token)
+    const { token } = req.params
+    const userConfirm = await Veterinario.findOne( { token } )
 
-    res.json({ msg: 'Confirmar perfil'})
+    if(!userConfirm) {
+        const error = new Error('Token no valido')
+        return res.status(404).json({ msg: error.message})
+    }
+    try {
+        userConfirm.token = null;
+        userConfirm.confirmado = true
+        await userConfirm.save()
+        res.json({ msg: 'Usuario confirmado correctamente'})
+
+    } catch (error) {
+      console.log(error)  
+    }
+    
 }
 
 export {
     registrar, 
     perfil,
-    confirmar
+    confirmar,
 }
