@@ -1,4 +1,5 @@
 import Veterinario from "../models/Veterinario.js"
+import generarJWT from "../helpers/generarJWT.js"
 
 const registrar = async (req, res) => {
     const { email, password, nombre } = req.body
@@ -64,7 +65,8 @@ const autenticar = async (req, res ) => {
 
     //Revisar el password
     if( await user.comprobarPassword(password)) {
-    //Autenticar
+    //Autenticar al usuario con json web token
+    res.json({token: generarJWT(user.id)})
     } else {
         const error = new Error('Password incorrecto')
         return res.status(403).json({ msg: error.message})
