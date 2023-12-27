@@ -92,10 +92,27 @@ const lostPassword = async (req, res ) => {
     }
 }
 
-const comprobarToken = (req, res ) => {
-
+const comprobarToken = async (req, res ) => {
+    const { token } = req.params
+    const tokenValido = await Veterinario.findOne({ token })
+    if(tokenValido){
+        //Si el token es valido el usuario existe
+        res.json({ msg: 'Token valido y el usuario existe '})
+    } else {
+        const error = new Error('Token no valido')
+        return res.status(400).json({msg: error.message})
+    }
 }
-const newPassword = (req, res ) => {
+const newPassword = async (req, res ) => {
+    //params es lo que viene en la url, body es lo que escribe la persona en el formulario
+    const { token } = req.params
+    const { password } = req.body
+
+    const veterinario = await Veterinario.findOne({token})
+    if(!veterinario){
+        const error = new Error('Token no valido')
+        return res.status(400).json({msg: error.message})
+    }
 
 }
 
