@@ -110,8 +110,17 @@ const newPassword = async (req, res ) => {
 
     const veterinario = await Veterinario.findOne({token})
     if(!veterinario){
-        const error = new Error('Token no valido')
+        const error = new Error('Hubo un error')
         return res.status(400).json({msg: error.message})
+    }
+
+    try {
+        veterinario.token = null
+        veterinario.password = password
+        await veterinario.save()
+        res.json({ msg: 'Password modificado correctamente '})
+    } catch (error) {
+        console.log(error)
     }
 
 }
