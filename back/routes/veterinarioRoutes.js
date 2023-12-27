@@ -17,8 +17,7 @@ router.post('/', registrar)
 router.post('/login', autenticar)
 router.get('/confirmar/:token', confirmar)
 router.post('/lost-password', lostPassword)
-router.get('/lost-password/:token', comprobarToken)
-router.post('/lost-password/:token', newPassword)
+router.route('/lost-password/:token').get(comprobarToken).post(newPassword)
 
 //Parte privada
 router.get('/perfil', checkAuth, perfil)
