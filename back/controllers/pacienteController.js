@@ -19,3 +19,12 @@ export const obtenerPacientes = async ( req, res ) =>{
 
     res.json(pacientes)
 }
+export const obtenerPaciente = async ( req, res ) =>{
+
+}
+export const actualizarPaciente = async ( req, res ) =>{
+
+}
+export const eliminarPaciente = async ( req, res ) =>{
+
+}
