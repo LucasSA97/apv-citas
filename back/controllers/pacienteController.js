@@ -20,11 +20,22 @@ export const obtenerPacientes = async ( req, res ) =>{
     res.json(pacientes)
 }
 export const obtenerPaciente = async ( req, res ) =>{
+    const { id } = req.params
+    const paciente = await Paciente.findById(id)
 
+    if(paciente.veterinario._id.toString() !== req.veterinario._id.toString()){
+         return res.json({msg: 'Accion no valida'})
+    }
+
+    if(paciente){
+        res.json(paciente)
+    }
 }
+
 export const actualizarPaciente = async ( req, res ) =>{
 
 }
+
 export const eliminarPaciente = async ( req, res ) =>{
 
 }
