@@ -1,15 +1,21 @@
 import Paciente from '../models/Paciente.js'
 
 export const agregarPaciente = async ( req, res ) =>{
-const paciente = new Paciente( req.body )
- paciente.veterinario = req.veterinario._id
-try {
+    const paciente = new Paciente( req.body )
+        paciente.veterinario = req.veterinario._id
+    try {
     const pacienteAlmacenado = await paciente.save()
     res.json(pacienteAlmacenado)
-} catch (error) {
+    
+    } catch (error) {
     console.log(error)
+    }
 }
-}
-export const obtenerPacientes = ( req, res ) =>{
 
+export const obtenerPacientes = async ( req, res ) =>{
+    const pacientes = await Paciente.find()
+        .where('veterinario')
+        .equals(req.veterinario)
+
+    res.json(pacientes)
 }
