@@ -3,7 +3,7 @@ function App() {
 
 
   return (
-    <h1>Empezando el front</h1>
+    <h1 className="font-bold">Empezando el front</h1>
   )
 }
 
