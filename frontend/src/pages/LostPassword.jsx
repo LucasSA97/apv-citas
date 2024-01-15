@@ -24,7 +24,7 @@ const LostPassword = () => {
             </form>
             <nav className="mt-10 lg:flex lg:justify-between">
                 <Link className="block text-center my-5 text-gray-600" to="/">¿Ya tienes cuenta? Inicia Sesión</Link>
-                <Link className="block text-center my-5 text-gray-600" to="/lost-password">¿No tienes cuenta? Regístrate</Link>
+                <Link className="block text-center my-5 text-gray-600" to="/register">¿No tienes cuenta? Regístrate</Link>
             </nav>
         </div>
     </>

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import Alert from "../components/Alert"
 const Register = () => {
 
   const [nombre, setNombre ] = useState('')
@@ -7,28 +8,41 @@ const Register = () => {
   const [password, setPassword ] = useState('')
   const [repetirPassword, setRepetirPassword ] = useState('')
 
+
+  const [alert, setAlert] = useState({})
+
   const handleSubmit = e => {
     e.preventDefault()
     if([nombre, email, password, repetirPassword].includes('')){
-      console.log('hay campos vacios')
+      setAlert({msg: 'Hay campos vacios', error: true})
       return
     }
     if(password !== repetirPassword){
-      console.log('Los passwords no son iguales')
+      setAlert({msg: 'Los passwords no son iguales', error: true})
       return
     }
     if( password.length < 8){
-      console.log('Son pocos caracteres')
+      setAlert({msg: 'Son pocos caracteres, minimo deben ser 6', error: true})
+      return
     }
+    setAlert({})
+
+    //creando usuario
   }
 
+  const { msg } = alert
+
   return (
+
     <>
       <div>
         <h1 className="text-indigo-700  font-black text-6xl">Crea tu Cuenta y Administra {''}<span className="text-black font-black"> tus Pacientes</span>
         </h1>
       </div>
       <div className="mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white">
+      { msg && <Alert
+         alert={alert}
+         ></Alert>}
             <form 
               onSubmit={handleSubmit}
               >
