@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import Alert from "../components/Alert"
+import axios from "axios"
+
 const Register = () => {
 
   const [nombre, setNombre ] = useState('')
@@ -11,7 +13,7 @@ const Register = () => {
 
   const [alert, setAlert] = useState({})
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     if([nombre, email, password, repetirPassword].includes('')){
       setAlert({msg: 'Hay campos vacios', error: true})
@@ -27,7 +29,14 @@ const Register = () => {
     }
     setAlert({})
 
-    //creando usuario
+    //creando usuario en la api
+    try {
+      const url = 'http://localhost:4000/api/veterinarios/'
+      await axios.post(url, { nombre, email, password })
+      setAlert({msg: 'Creado correctamente. Revisa tu email', error: false })
+    } catch (error) {
+      setAlert({error: true, msg: error.response.data.msg})
+    }
   }
 
   const { msg } = alert
