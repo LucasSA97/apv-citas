@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom"
-
+import { useState } from "react"
 const Register = () => {
+
+  const [nombre, setNombre ] = useState('')
+  const [email, setEmail ] = useState('')
+  const [password, setPassword ] = useState('')
+  const [repetirPassword, setRepetirPassword ] = useState('')
+
   return (
     <>
       <div>
@@ -17,7 +23,9 @@ const Register = () => {
                     <input 
                     className="border w-full p-3 mt-3 bg-green-200 rounded-lg" 
                     type="text" 
-                    placeholder="Nombre"  />
+                    placeholder="Nombre"
+                    value={nombre} 
+                    onChange={e => setNombre(e.target.value)} />
                 </div>
                 <div className="my-5">
                     <label 
@@ -26,7 +34,10 @@ const Register = () => {
                     <input
                      className="border w-full p-3 mt-3 bg-green-200 rounded-lg" 
                      type="email" 
-                     placeholder="Email"/>
+                     placeholder="Email"
+                     value={email} 
+                     onChange={e => setEmail(e.target.value)}
+                     />
                 </div>
                 <div className="my-5">
                     <label 
@@ -35,7 +46,10 @@ const Register = () => {
                     <input
                      className="border w-full p-3 mt-3 bg-green-200 rounded-lg" 
                      type="password" 
-                     placeholder="Password"/>
+                     placeholder="Password"
+                     value={password} 
+                    onChange={e => setPassword(e.target.value)}
+                     />
                 </div>
                 <div className="my-5">
                     <label 
@@ -44,12 +58,17 @@ const Register = () => {
                     <input
                      className="border w-full p-3 mt-3 bg-green-200 rounded-lg" 
                      type="password" 
-                     placeholder="Repite tu Password"/>
+                     placeholder="Repite tu Password"
+                     value={repetirPassword} 
+                    onChange={e => setRepetirPassword(e.target.value)}
+                     />
                 </div>
+
                 <input 
                 type="submit"
                 value="Crear Cuenta"
-                className="bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-indigo-800 md:w-auto " />
+                className="bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-indigo-800 md:w-auto " 
+                />
 
             </form>
 
