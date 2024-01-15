@@ -1,9 +1,10 @@
 import Veterinario from "../models/Veterinario.js"
 import generarJWT from "../helpers/generarJWT.js"
 import generarId from "../helpers/generarId.js"
+import emailRegistro from "../helpers/emailOlvidePassword.js"
 
 const registrar = async (req, res) => {
-    const { email, password, nombre } = req.body
+    const { email, nombre } = req.body
 
     //Prevenir usuario replicado
     const existeUsuario = await Veterinario.findOne({ email })
@@ -16,6 +17,13 @@ const registrar = async (req, res) => {
     //Guardaremos un veterinario con los metodos new y save(sirve para guardar un objeto en la db) de mongoose
     const veterinario = new Veterinario(req.body)
     const veterinarioAlmacenado = await veterinario.save()
+
+    //Enviar el email
+    emailRegistro({
+        email,
+        nombre,
+        token: veterinarioAlmacenado.token
+    })
 
     res.json(veterinarioAlmacenado)
     } catch (error) {
