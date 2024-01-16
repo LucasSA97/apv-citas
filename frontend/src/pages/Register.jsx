@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import Alert from "../components/Alert"
-import axios from "axios"
 import clienteAxios from "../config/axios"
 
 const Register = () => {
