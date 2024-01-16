@@ -16,7 +16,7 @@ function App() {
           <Route index element={ <Login /> }/>
           <Route path="lost-password" element={ <LostPassword /> }/>
           <Route path="register" element={ <Register /> }/>
-          <Route path="confirm/:id" index element={ <ConfirmPage /> }/>
+          <Route path="confirm/:token" index element={ <ConfirmPage /> }/>
         </Route>
        {/* <Route path="/admin" element={ <AdminLayout/> }>
           <Route index element={ <Login /> }/>
