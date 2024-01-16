@@ -1,7 +1,8 @@
 import Veterinario from "../models/Veterinario.js"
 import generarJWT from "../helpers/generarJWT.js"
 import generarId from "../helpers/generarId.js"
-import emailRegistro from "../helpers/emailOlvidePassword.js"
+import emailRegistro from "../helpers/emailRegistro.js"
+import emailOlvidePassword from "../helpers/emailOlvidePassword.js"
 
 const registrar = async (req, res) => {
     const { email, nombre } = req.body
@@ -44,13 +45,14 @@ const confirmar = async (req, res) => {
 
     if(!userConfirm) {
         const error = new Error('Token no valido')
+        console.log(error)
         return res.status(404).json({ msg: error.message})
     }
     try {
         userConfirm.token = null;
         userConfirm.confirmado = true
         await userConfirm.save()
-        res.json({ msg: 'Usuario confirmado correctamente'})
+        res.json({ msg: "Usuario confirmado correctamente"})
 
     } catch (error) {
       console.log(error)  
@@ -94,6 +96,13 @@ const lostPassword = async (req, res ) => {
     try {
         existeVeterinario.token = generarId()
         await existeVeterinario.save()
+
+        //Enviar Email con instrucciones
+        emailOlvidePassword({
+            email,
+            nombre: existeVeterinario.nombre,
+            token: existeVeterinario.token
+        })
         res.json({msg: "Hemos enviado un email con las instrucciones"})
     } catch (error) {
         console.log(error)

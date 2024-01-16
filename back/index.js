@@ -14,20 +14,24 @@ dotenv.config()
 
 connectDB()
 
-const dominioPermitidos = ["http://localhost:3000"]
-
+const dominioPermitidos = [process.env.FRONTEND_URL]
 const corsOptions = {
-    origin: function (origin, callback) {
-        if(dominioPermitidos.indexOf(origin) !== -1) {
-            //El origen del request esta permitido
-            callback(null, true)
-        } else {
-            callback(new Error('No esta permitido por CORS'))
-        }
-    }
-}
+    origin: dominioPermitidos
+};
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if(dominioPermitidos.indexOf(origin) !== -1) {
+//             //El origen del request esta permitido
+//             callback(null, true)
+//         } else {
+//             callback(new Error('No esta permitido por CORS'))
+//         }
+//     }
+// }
+
+// app.use(cors(corsOptions))
 
 
 app.use('/api/veterinarios', veterinarioRoutes)
