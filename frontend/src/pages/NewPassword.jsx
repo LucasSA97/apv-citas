@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import Alert from "../components/Alert"
 import clienteAxios from "../config/axios"
 
@@ -9,6 +9,7 @@ const params = useParams()
 const { token } = params
 
 const [password, setPassword] = useState('')
+const [passwordModificado, setPasswordModificado] = useState(false)
 const [ alert , setAlert] = useState({})
 const [tokenValido, setTokenValido ] = useState(false)
 
@@ -30,6 +31,30 @@ useEffect(() => {
   comprobarToken()
 }, [])
 
+const handleSubmit = async (e) => {
+    e.preventDefaut()
+    if(password.length < 6) {
+        setAlert({
+            msg: 'El Password debe tener minimo 6 caracteres',
+            error: true
+        })
+        return
+    }
+    try {
+        const url = `/veterinarios/lost-password/${token}`
+        const { data } = await clienteAxios.post(url, { password })
+        setAlert({
+            msg: data.msg
+        })
+        setPasswordModificado(true)
+    } catch (error) {
+        setAlert({
+            msg: error.response.data.msg,
+            error: true
+        })
+    }
+}
+
 const { msg } = alert
   return (
     <>
@@ -44,7 +69,9 @@ const { msg } = alert
          {
             tokenValido && 
             (
-                <form action="">
+                <>
+                <form 
+                onSubmit={handleSubmit}>
                 <div className="my-5">
                     <label 
                         className="uppercase text-grey-600 block text-xl font-bold">
@@ -64,7 +91,14 @@ const { msg } = alert
                         className="bg-indigo-700 w-full py-3 px-10 rounded-xl text-white uppercase font-bold mt-5 hover:cursor-pointer hover:bg-indigo-800 md:w-auto " 
                     />
                 </form>
+
+          
+            </>
             )
+         }
+         {
+            passwordModificado &&       <Link className="block text-center my-5 text-gray-600" to="/">Iniciar Sesión
+            </Link>
          }
 
      </div>
