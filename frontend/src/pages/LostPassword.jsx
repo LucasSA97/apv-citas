@@ -2,7 +2,9 @@ import { Link } from "react-router-dom"
 import { useState } from "react"
 import clienteAxios from "../config/axios"
 import Alert from "../components/Alert"
+
 const LostPassword = () => {
+
 
   const [ email, setEmail ] = useState('')
   const [ alert, setAlert ] = useState({})
