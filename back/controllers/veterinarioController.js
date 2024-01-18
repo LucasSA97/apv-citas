@@ -35,7 +35,7 @@ const registrar = async (req, res) => {
 
 const perfil = (req, res) => {
     const { veterinario } = req
-    res.json({ perfil: veterinario })
+    res.json(veterinario)
 }
 
 const confirmar = async (req, res) => {
@@ -70,7 +70,7 @@ const autenticar = async (req, res ) => {
     }
 
     //Comprobar si está confirmado
-    if(user.confirmado){
+    if(!user.confirmado){
         const error = new Error('Confirma tu cuenta')
         return res.status(403).json({ msg: error.message})
     }

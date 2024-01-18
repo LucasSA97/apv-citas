@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-const emailOlvidePassword = async (datos) => {
+const emailRegistro = async (datos) => {
     const transport = nodemailer.createTransport({
         host: process.env.EMAIL_HOST,
         port:process.env.EMAIL_PORT ,
@@ -15,10 +15,10 @@ const emailOlvidePassword = async (datos) => {
       const info = await transport.sendMail({
         from: 'APV - Administrador de Pacientes de Veterinaria',
         to: email,
-        subject: 'Comprobar cuenta',
-        text: 'Comprobar cuenta',
-        html: `<p>Hola ${nombre}! Comprueba tu cuenta en APV.</p>
-        <p>Tu cuenta ya está lista. Solo debes comprobarla en el siguiente enlace: <a href='${process.env.FRONTEND_URL}/confirm/${token}'>Comprobar Cuenta</a>
+        subject: 'Reestablece tu Password',
+        text: 'Reestablece tu Password',
+        html: `<p>Hola ${nombre}! Has solicitado reestablecer tu password</p>
+        <p>Sigue el siguiente enlace para generar un nuevo password: <a href='${process.env.FRONTEND_URL}/lost-password/${token}'>Reestablecer Password</a>
         </p>
         <p>Si tu no creaste esta cuenta, puedes ignorar este mensaje</p>`
       })
@@ -26,4 +26,4 @@ const emailOlvidePassword = async (datos) => {
       console.log('mensaje enviado: %s', info.messageId)
 }
 
-export default emailOlvidePassword
+export default emailRegistro
