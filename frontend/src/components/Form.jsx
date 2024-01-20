@@ -9,11 +9,11 @@ const Form = () => {
     const [propietario, setPropietario] = useState('')
     const [email, setEmail] = useState('')
     const [sintomas, setSintomas] = useState('')
-    const [fecha, setFecha] = useState(Date.now)
+    const [fecha, setFecha] = useState('')
 
     const [alert, setAlert] = useState({})
 
-    const { pacientes } = usePacientes()
+    const { savePaciente } = usePacientes()
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -24,6 +24,8 @@ const Form = () => {
             })
             return
         }
+        setAlert({})
+        savePaciente({ nombre, propietario, email, sintomas, fecha })
     }
 
     const { msg } = alert
