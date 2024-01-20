@@ -25,6 +25,7 @@ function App() {
           <Route path="lost-password/:token" element={ <NewPassword /> }/>
           <Route path="confirm/:token" index element={ <ConfirmPage /> }/>
         </Route>
+        
         <Route path="/admin" element={<PrivateZone/>}>
           <Route index element={<AdministrarPacientes/>}/>
         </Route>
