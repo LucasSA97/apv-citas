@@ -1,5 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom"
 import useAuth from '../hooks/useAuth'
+import Footer from "../components/Footer"
+import Header from "../components/Header"
 const PrivateZone = () => {
 
     const { auth, cargando } = useAuth() 
@@ -7,10 +9,11 @@ const PrivateZone = () => {
     if( cargando ) return 'cargando...'
   return (
     <>
-        <h1>
-            PrivateZone
-        </h1>
+        <Header/>
+
          { auth?._id ? <Outlet/> : <Navigate to="/"/>}
+
+        <Footer/>
     </>
   )
 }
