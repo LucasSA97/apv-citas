@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Alert from './Alert'
+import usePacientes from "../hooks/usePacientes"
 
 
 const Form = () => {
@@ -11,6 +12,8 @@ const Form = () => {
     const [fecha, setFecha] = useState(Date.now)
 
     const [alert, setAlert] = useState({})
+
+    const { pacientes } = usePacientes()
 
     const handleSubmit = e => {
         e.preventDefault()
