@@ -1,6 +1,16 @@
+import { useState } from "react"
 
 
 const Form = () => {
+
+    const [nombre, setNombre] = useState('')
+    const [propietario, setPropietario] = useState('')
+    const [email, setEmail] = useState('')
+    const [sintomas, setSintomas] = useState('')
+    const [fecha, setFecha] = useState(Date.now)
+
+    const [alert, setAlert] = useState({})
+
   return (
     <>
         <p className='text-lg text-center mb-10'>Añade tus Pacientes y {''} y <span className='text-indigo-600 font-bold'>Administralos</span> </p>
@@ -11,13 +21,15 @@ const Form = () => {
             <div className="mb-5">
                 <label 
                     className="text-gray-700 font-bold"
-                    htmlFor="mascota"
+                    htmlFor="nombre"
                 >Nombre Mascota</label>
                 <input 
-                    id="mascota"
+                    id="nombre"
                     type="text"
                     placeholder="Nombre de la Mascota"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    value={nombre}
+                    onChange={e => setNombre(e.target.value)}
                  />
             </div>
             <div className="mb-5">
@@ -30,6 +42,8 @@ const Form = () => {
                     type="text"
                     placeholder="Nombre del Propietario"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    value={propietario}
+                    onChange={e => setPropietario(e.target.value)}
                  />
             </div>
             <div className="mb-5">
@@ -42,6 +56,8 @@ const Form = () => {
                     type="email"
                     placeholder="Email del Propietario"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                  />
             </div>
             <div className="mb-5">
@@ -53,6 +69,8 @@ const Form = () => {
                     id="fecha"
                     type="date"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    value={fecha}
+                    onChange={e => setFecha(e.target.value)}
                  />
             </div>
             <div className="mb-5">
@@ -64,6 +82,8 @@ const Form = () => {
                     id="sintomas"
                     placeholder="Describe los Síntomas"
                     className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                    value={sintomas}
+                    onChange={e => setSintomas(e.target.value)}
                  />
             </div>
             <input 
