@@ -1,13 +1,18 @@
 
 import { Route, BrowserRouter, Routes } from "react-router-dom"
+
 import AuthLayout from "./layout/AuthLayout"
+import PrivateZone from "./layout/PrivateZone"
+
 import Login from "./pages/Login"
 import LostPassword from "./pages/LostPassword"
 import Register from "./pages/Register"
 import ConfirmPage from "./pages/ConfirmPage"
 import NewPassword from "./pages/newPassword"
+
 import { AuthProvider } from "./context/AuthProvider"
-import PrivateZone from "./layout/PrivateZone"
+import { PacientesProvider } from "./context/PacientesProvider"
+
 import AdministrarPacientes from "./pages/AdministrarPacientes"
 
 function App() {
@@ -16,6 +21,7 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <PacientesProvider>
         <Routes>
 
         <Route path="/" element={ <AuthLayout/> }>
@@ -31,6 +37,7 @@ function App() {
         </Route>
 
         </Routes>
+        </PacientesProvider>
       </AuthProvider>
     </BrowserRouter>
   )
