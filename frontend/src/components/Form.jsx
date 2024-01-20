@@ -69,7 +69,7 @@ const Form = () => {
             <input 
                 type="submit"
                 value='Agregar Paciente'
-                className="bg-indigo-600 w-full p-3 text-white font-bold hover:bg-indigo-800 cursor-pointer transition-colors"
+                className="bg-indigo-600 w-full p-3 text-white font-bold hover:bg-indigo-800 cursor-pointer transition-colors rounded-md"
             />
         </form>
 
