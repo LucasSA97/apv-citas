@@ -4,6 +4,7 @@ const AuthContext = createContext()
 
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({children}) => {
+
     const [cargando, setCargando ] = useState(true)
     const [ auth, setAuth ] = useState({})
 
@@ -31,6 +32,11 @@ const AuthProvider = ({children}) => {
         autenticarUser()
     }, [])
 
+    const cerrarSesion = () => {
+        localStorage.removeItem('token')
+        setAuth({})
+    }
+
 
     return (
 
@@ -38,7 +44,8 @@ const AuthProvider = ({children}) => {
             value={{
                 auth,
                 setAuth,
-                cargando
+                cargando,
+                cerrarSesion
             }}
             >
             {children}
