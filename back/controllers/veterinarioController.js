@@ -78,7 +78,13 @@ const autenticar = async (req, res ) => {
     //Revisar el password
     if( await user.comprobarPassword(password)) {
     //Autenticar al usuario con json web token
-    res.json({token: generarJWT(user.id)})
+    res.json({
+        _id: user._id,
+        nombre: user.nombre,
+        email: user.email,
+        token: generarJWT(user.id),
+
+    })
     } else {
         const error = new Error('Password incorrecto')
         return res.status(403).json({ msg: error.message})
