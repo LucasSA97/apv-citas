@@ -30,6 +30,11 @@ export const PacientesProvider = ({children}) => {
     }, [])
 
     const savePaciente = async (paciente) => {
+        if( paciente.id ) {
+
+        } else {
+
+        } return
         try {
             const token = localStorage.getItem('token')
             const config = {
@@ -54,7 +59,8 @@ export const PacientesProvider = ({children}) => {
         <PacientesContext.Provider value={{
             pacientes,
             savePaciente,
-            setEdicion
+            setEdicion,
+            paciente
         }}>
             {children}
         </PacientesContext.Provider>
