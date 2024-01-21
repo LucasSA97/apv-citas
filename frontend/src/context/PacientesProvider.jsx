@@ -30,25 +30,34 @@ export const PacientesProvider = ({children}) => {
     }, [])
 
     const savePaciente = async (paciente) => {
-        if( paciente.id ) {
 
-        } else {
-
-        } return
-        try {
-            const token = localStorage.getItem('token')
-            const config = {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                }
+        const token = localStorage.getItem('token')
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
             }
-            const { data } = await clienteAxios.post('/pacientes', paciente, config)
-            const { createdAt, updatedAt, __v, ...pacienteAlmacenado } = data
-            setPacientes([pacienteAlmacenado, ...pacientes])
-        } catch (error) {
-            console.log(error.response.data.msg)
         }
+
+        if( paciente.id ) {
+            try {
+                const { data } = await clienteAxios.put(`/pacientes/${paciente.id}`, paciente, config)
+                 const pacienteActualizado = pacientes.map( pacienteState => pacienteState._id === data._id ? data : pacienteState)
+                 setPacientes(pacienteActualizado)
+            } catch (error) {
+               console.log(error) 
+            }
+        } else {
+            try {
+
+                const { data } = await clienteAxios.post('/pacientes', paciente, config)
+                const { createdAt, updatedAt, __v, ...pacienteAlmacenado } = data
+                setPacientes([pacienteAlmacenado, ...pacientes])
+            } catch (error) {
+                console.log(error.response.data.msg)
+            }
+        } 
+
     }
 
     const setEdicion = (paciente) => {

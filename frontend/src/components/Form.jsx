@@ -36,8 +36,16 @@ const Form = () => {
             })
             return
         }
-        setAlert({})
         savePaciente({ nombre, propietario, email, sintomas, fecha, id })
+        setAlert({
+            msg: 'Guardado Correctamente'
+        })
+        setNombre('')
+        setPropietario('')
+        setEmail('')
+        setSintomas('')
+        setFecha('')
+        setId('')
     }
 
     const { msg } = alert
