@@ -31,7 +31,8 @@ const Form = () => {
     const { msg } = alert
   return (
     <>
-        <p className='text-lg text-center mb-10'>Añade tus Pacientes y {''} y <span className='text-indigo-600 font-bold'>Administralos</span> </p>
+         <h2 className="text-3xl text-center font-semibold">Administrador de Pacientes</h2>
+        <p className='text-xl text-center mt-5 mb-10'>Añade tus Pacientes y {''} y <span className='text-indigo-600 font-bold'>Administralos</span> </p>
 
         <form 
             className="bg-white py-10 px-5 mb-10 lg:mb-5 shadow-md rounded-md"
