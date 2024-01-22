@@ -15,7 +15,7 @@ const PrivateZone = () => {
             <main className="container mx-auto mt-10">
                 <Outlet/>
             </main>
-         ) : <Navigate to="/"/>}
+         ) : <Navigate to="/admin"/>}
 
         <Footer/>
     </>

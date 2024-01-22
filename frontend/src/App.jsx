@@ -34,7 +34,7 @@ function App() {
           <Route path="confirm/:token" index element={ <ConfirmPage /> }/>
         </Route>
         
-        <Route path="/admin" element={<PrivateZone/>}>
+        <Route path="/admin/*" element={<PrivateZone/>}>
           <Route index element={<AdministrarPacientes/>}/>
           <Route path="perfil" element={<EditarPerfil/>}/>
           <Route path="cambiar-password" element={<CambiarPassword/>}/>

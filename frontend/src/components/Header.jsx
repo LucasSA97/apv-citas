@@ -18,7 +18,7 @@ const Header = () => {
                 className="text-white text-xl font-bold hover:bg-indigo-100 rounded-lg p-2 hover:text-black"
                 >Pacientes</Link>
                 <Link 
-                to='/admin/perfil' 
+                to='perfil' 
                 className="text-white text-xl font-bold hover:bg-indigo-100 rounded-lg p-2 hover:text-black"
                 >Perfil</Link>
                 <button 
