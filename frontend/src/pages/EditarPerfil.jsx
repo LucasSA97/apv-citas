@@ -1,6 +1,19 @@
+import { useEffect, useState } from "react"
 import AdminNav from "../components/AdminNav"
+import useAuth from '../hooks/useAuth'
 
 const EditarPerfil = () => {
+
+    const { auth } = useAuth() 
+    const [ perfil, setPerfil ] = useState({})
+
+    useEffect(() => {
+      setPerfil(auth)
+    
+      
+    }, [auth])
+    
+
   return (
     <>
         <AdminNav></AdminNav>
@@ -14,7 +27,11 @@ const EditarPerfil = () => {
                         <input 
                         type="text"
                         className="border bg-gray-200 w-full p-2 rounded-lg mt-5"
-                        name="name" />
+                        name="name"
+                        value={perfil.nombre || ''}
+                        onChange={e => setPerfil({...perfil, [e.target.name] : e.target.value
+                        })}
+                        />
                     </div>
                     <div className="my-3">
                         <label htmlFor="">Sitio Web:</label>
