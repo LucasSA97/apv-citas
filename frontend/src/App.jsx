@@ -9,6 +9,8 @@ import LostPassword from "./pages/LostPassword"
 import Register from "./pages/Register"
 import ConfirmPage from "./pages/ConfirmPage"
 import NewPassword from "./pages/newPassword"
+import EditarPerfil from "./pages/EditarPerfil"
+import CambiarPassword from "./pages/CambiarPassword"
 
 import { AuthProvider } from "./context/AuthProvider"
 import { PacientesProvider } from "./context/PacientesProvider"
@@ -34,6 +36,8 @@ function App() {
         
         <Route path="/admin" element={<PrivateZone/>}>
           <Route index element={<AdministrarPacientes/>}/>
+          <Route path="perfil" element={<EditarPerfil/>}/>
+          <Route path="cambiar-password" element={<CambiarPassword/>}/>
         </Route>
 
         </Routes>
