@@ -7,7 +7,8 @@ import {
     autenticar,
     lostPassword,
     newPassword,
-    comprobarToken 
+    comprobarToken,
+    actualizarPerfil
     } from '../controllers/veterinarioController.js'
 
 const router = express.Router()
@@ -21,6 +22,7 @@ router.route('/lost-password/:token').get(comprobarToken).post(newPassword)
 
 //Parte privada
 router.get('/perfil', checkAuth, perfil)
+router.put('/perfil/:id', checkAuth, actualizarPerfil)
 
 
 
