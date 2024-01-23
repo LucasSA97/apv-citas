@@ -1,5 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 import clienteAxios from "../config/axios";
+import Alert from "../components/Alert";
 const AuthContext = createContext()
 
 // eslint-disable-next-line react/prop-types
@@ -7,6 +8,7 @@ const AuthProvider = ({children}) => {
 
     const [cargando, setCargando ] = useState(true)
     const [ auth, setAuth ] = useState({})
+    const [ alert, setAlert ] = useState({})
 
     useEffect(() => {
         const autenticarUser = async () => {
@@ -53,9 +55,15 @@ const AuthProvider = ({children}) => {
         try {
             const url = `/veterinarios/perfil/${datos._id}`
             const { data } = await clienteAxios.put( url, datos, config )
-            console.log(data)
+            
+            return {
+                msg: 'Almacenado correctamente'
+            }
         } catch (error) {
-            console.log(error.response)
+            return {
+                msg: error.response.data.msg,
+                error: true
+            }
         }
     }
 
