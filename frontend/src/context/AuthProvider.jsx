@@ -37,6 +37,10 @@ const AuthProvider = ({children}) => {
         setAuth({})
     }
 
+    const actualizarPerfil = datos => {
+        console.log(datos)
+    }
+
 
     return (
 
@@ -45,7 +49,8 @@ const AuthProvider = ({children}) => {
                 auth,
                 setAuth,
                 cargando,
-                cerrarSesion
+                cerrarSesion,
+                actualizarPerfil
             }}
             >
             {children}

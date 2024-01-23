@@ -1,17 +1,36 @@
 import { useEffect, useState } from "react"
 import AdminNav from "../components/AdminNav"
 import useAuth from '../hooks/useAuth'
+import Alert from '../components/Alert'
 
 const EditarPerfil = () => {
 
-    const { auth } = useAuth() 
+    const { auth, actualizarPerfil } = useAuth() 
     const [ perfil, setPerfil ] = useState({})
+    const [ alert, setAlert ] = useState({})
 
     useEffect(() => {
       setPerfil(auth)
     
       
     }, [auth])
+
+    const handleSubmit = e => {
+        e.preventDefault()
+
+        const { nombre, email } = perfil
+
+        if([ nombre, email].includes('')){
+            setAlert({
+                msg: 'Email y Nombre son requeridos',
+                error: true
+            })
+            return
+        }
+        actualizarPerfil(perfil)
+    }
+
+    const { msg } = alert
     
 
   return (
@@ -21,13 +40,14 @@ const EditarPerfil = () => {
         <p className="text-xl mt-5 mb-10 text-center"> Modifica tu {''} <span className="text-indigo-600 font-extrabold">Perfil</span> </p>
         <div className="flex justify-center">
             <div className="w-full md:w-1/2 bg-white shadow rounded-lg p-5">
-                <form action="">
+                { msg && <Alert alert={alert}/>}
+                <form  onSubmit={handleSubmit}>
                     <div className="my-3">
                         <label htmlFor="">Nombre:</label>
                         <input 
                         type="text"
                         className="border bg-gray-200 w-full p-2 rounded-lg mt-5"
-                        name="name"
+                        name="nombre"
                         value={perfil.nombre || ''}
                         onChange={e => setPerfil({...perfil, [e.target.name] : e.target.value
                         })}
@@ -38,21 +58,30 @@ const EditarPerfil = () => {
                         <input 
                         type="text"
                         className="border bg-gray-200 w-full p-2 rounded-lg mt-5"
-                        name="web" />
+                        name="web"
+                        value={perfil.web || ''}
+                        onChange={e => setPerfil({...perfil, [e.target.name] : e.target.value
+                        })} />
                     </div>
                     <div className="my-3">
                         <label htmlFor="">Telefono:</label>
                         <input 
                         type="text"
                         className="border bg-gray-200 w-full p-2 rounded-lg mt-5"
-                        name="telefono" />
+                        name="telefono"
+                        value={perfil.telefono || ''}
+                        onChange={e => setPerfil({...perfil, [e.target.name] : e.target.value
+                        })} />
                     </div>
                     <div className="my-3">
                         <label htmlFor="">Email:</label>
                         <input 
                         type="text"
                         className="border bg-gray-200 w-full p-2 rounded-lg mt-5"
-                        name="email" />
+                        name="email"
+                        value={perfil.email || ''}
+                        onChange={e => setPerfil({...perfil, [e.target.name] : e.target.value
+                        })} />
                     </div>
 
                         <input type="submit"
