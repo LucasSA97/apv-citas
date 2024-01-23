@@ -1,26 +1,38 @@
 import AdminNav from "../components/AdminNav"
 import Alert from "../components/Alert"
 import { useState } from "react"
+import useAuth from "../hooks/useAuth"
 
 
 const CambiarPassword = () => {
 
+    const { guardarPassword } = useAuth()
+
+
     const [ alert , setAlert ] = useState({})
+    const [ password, setPassword ] = useState({
+        pwd_actual: '',
+        pwd_nuevo: ''
+    })
 
     const handleSubmit = async e => {
         e.preventDefault()
 
-        const { nombre, email } = perfil
-
-        if([ nombre, email].includes('')){
-            setAlert({
-                msg: 'Email y Nombre son requeridos',
-                error: true
-            })
-            return
-        }
-       const result = await actualizarPerfil(perfil)
-       setAlert(result)
+       if(Object.values(password).some(campo => campo === '')){
+        setAlert({
+            msg: 'Todos los campos son obligatorios',
+            error: true
+        })
+        return
+       }
+       if(password.pwd_nuevo.length < 6 ){
+        setAlert({
+            msg: 'El password debe tener minimo 6 caracteres',
+            error: true
+        })
+        return
+       }
+       guardarPassword(password)
     }
 
     const { msg } = alert
@@ -38,20 +50,26 @@ const CambiarPassword = () => {
                     <div className="my-3">
                         <label htmlFor="">Password Actual</label>
                         <input 
-                        type="text"
+                        type="password"
                         className="border bg-gray-200 w-full p-2 rounded-lg mt-5"
-                        name="nombre"
+                        name="pwd_actual"
                         placeholder="Escribe tu password actual"
+                        onChange={e => setPassword({
+                            ...password,[e.target.name] : e.target.value
+                        })}
                         />
 
                     </div>
                     <div className="my-3">
                         <label htmlFor=""> Nuevo Password</label>
                         <input 
-                        type="text"
+                        type="password"
                         className="border bg-gray-200 w-full p-2 rounded-lg mt-5"
-                        name="nombre"
+                        name="pwd_nuevo"
                         placeholder="Escribe tu nuevo password"
+                        onChange={e => setPassword({
+                            ...password,[e.target.name] : e.target.value
+                        })}
                         />
 
                     </div>
