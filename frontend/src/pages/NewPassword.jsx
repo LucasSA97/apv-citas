@@ -5,10 +5,12 @@ import clienteAxios from "../config/axios"
 
 const NewPassword = () => {
 
+const [password, setPassword] = useState('')
+ 
 const params = useParams()
+
 const { token } = params
 
-const [password, setPassword] = useState('')
 const [passwordModificado, setPasswordModificado] = useState(false)
 const [ alert , setAlert] = useState({})
 const [tokenValido, setTokenValido ] = useState(false)
@@ -29,10 +31,10 @@ useEffect(() => {
     }
   }
   comprobarToken()
-}, [])
+}, [token])
 
-const handleSubmit = async (e) => {
-    e.preventDefaut()
+const handleSubmit = async e => {
+    e.preventDefault()
     if(password.length < 6) {
         setAlert({
             msg: 'El Password debe tener minimo 6 caracteres',
@@ -43,6 +45,7 @@ const handleSubmit = async (e) => {
     try {
         const url = `/veterinarios/lost-password/${token}`
         const { data } = await clienteAxios.post(url, { password })
+        console.log(data)
         setAlert({
             msg: data.msg
         })
@@ -56,6 +59,7 @@ const handleSubmit = async (e) => {
 }
 
 const { msg } = alert
+
   return (
     <>
      <div>

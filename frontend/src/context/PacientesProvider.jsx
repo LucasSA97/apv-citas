@@ -1,12 +1,15 @@
 import { useState, createContext, useEffect } from "react";
 import clienteAxios from '../config/axios'
+import useAuth from "../hooks/useAuth";
 
 const PacientesContext = createContext()
 
+// eslint-disable-next-line react/prop-types
 export const PacientesProvider = ({children}) => {
 
     const [ pacientes, setPacientes ] = useState([])
     const [ paciente, setPaciente ] = useState({})
+    const { auth } = useAuth()
 
     useEffect(() => {
         const obtenerPacientes = async () => {
@@ -27,7 +30,7 @@ export const PacientesProvider = ({children}) => {
             }
         }
         obtenerPacientes()
-    }, [])
+    }, [auth])
 
     const savePaciente = async (paciente) => {
 
@@ -51,6 +54,7 @@ export const PacientesProvider = ({children}) => {
             try {
 
                 const { data } = await clienteAxios.post('/pacientes', paciente, config)
+                // eslint-disable-next-line no-unused-vars
                 const { createdAt, updatedAt, __v, ...pacienteAlmacenado } = data
                 setPacientes([pacienteAlmacenado, ...pacientes])
             } catch (error) {
@@ -76,6 +80,7 @@ export const PacientesProvider = ({children}) => {
                     }
                 }
 
+                // eslint-disable-next-line no-unused-vars
                 const { data } = await clienteAxios.delete(`/pacientes/${id}`, config)
                 const pacientesActualizado = pacientes.filter( pacienteState => pacienteState._id !== id)
                 setPacientes(pacientesActualizado)

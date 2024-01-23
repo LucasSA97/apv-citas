@@ -8,7 +8,6 @@ import Login from "./pages/Login"
 import LostPassword from "./pages/LostPassword"
 import Register from "./pages/Register"
 import ConfirmPage from "./pages/ConfirmPage"
-import NewPassword from "./pages/newPassword"
 import EditarPerfil from "./pages/EditarPerfil"
 import CambiarPassword from "./pages/CambiarPassword"
 
@@ -16,6 +15,7 @@ import { AuthProvider } from "./context/AuthProvider"
 import { PacientesProvider } from "./context/PacientesProvider"
 
 import AdministrarPacientes from "./pages/AdministrarPacientes"
+import NewPassword from "./pages/newPassword"
 
 function App() {
 
