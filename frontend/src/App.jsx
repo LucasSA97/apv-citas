@@ -15,7 +15,9 @@ import { AuthProvider } from "./context/AuthProvider"
 import { PacientesProvider } from "./context/PacientesProvider"
 
 import AdministrarPacientes from "./pages/AdministrarPacientes"
-import NewPassword from "./pages/newPassword"
+import NewPassword from "./pages/NuevaContraseña"
+// import NewPassword from "./pages/newPassword"
+
 
 function App() {
 
@@ -30,7 +32,7 @@ function App() {
           <Route index element={ <Login /> }/>
           <Route path="register" element={ <Register /> }/>
           <Route path="lost-password" element={ <LostPassword /> }/>
-          <Route path="lost-password/:token" element={ <NewPassword /> }/>
+          <Route path="lost-password/:token" element={ <NewPassword/> }/>
           <Route path="confirm/:token" index element={ <ConfirmPage /> }/>
         </Route>
         

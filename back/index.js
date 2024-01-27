@@ -19,7 +19,12 @@ const corsOptions = {
     origin: dominioPermitidos
 };
 
-app.use(cors(corsOptions));
+// Enable cors
+app.use(
+    cors({
+      origin: '*',
+    }),
+  );
 // const corsOptions = {
 //     origin: function (origin, callback) {
 //         if(dominioPermitidos.indexOf(origin) !== -1) {
